@@ -74,7 +74,7 @@ class ViewController: UIViewController, ARSessionDelegate {
                     if let calories = calories {
                         print("Calories from API: \(calories)")
                         self.updatePredictionText(text + "\nColaries:\(calories)/100gr", atPosition: hitResult.worldTransform)
-                        self.selectedFoodDetails = (name: formattedPrediction, calories: calories, additionalDetails: "More details about \(formattedPrediction).")
+                        
                     } else {
                         print("Failed to get calories.")
                     }
@@ -87,7 +87,7 @@ class ViewController: UIViewController, ARSessionDelegate {
         let query = food.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let url = URL(string: "https://api.calorieninjas.com/v1/nutrition?query=" + query)!
         var request = URLRequest(url: url)
-        request.setValue("qB7SgmUJtCj4ShtX2RlQxw==7jzmtY5La6MHH8FE", forHTTPHeaderField: "X-Api-Key")
+        request.setValue("Your API key", forHTTPHeaderField: "X-Api-Key")
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
